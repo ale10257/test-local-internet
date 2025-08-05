@@ -1,0 +1,47 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWD}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - ${DB_PORT_EXT}:${DB_PORT}
+    working_dir: /app
+    volumes:
+      - .:/app/
+      - ./docker/db:/var/lib/mysql
+    networks:
+      - test
+  php:
+    build:
+      context: docker/php
+      args:
+        - UID
+        - GID
+        - UNAME
+    working_dir: /app
+    volumes:
+      - .:/app/
+    environment:
+      - PHP_IDE_CONFIG=serverName=test
+    depends_on:
+      - db
+    networks:
+      - test
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./docker/nginx/etc/conf.d:/etc/nginx/conf.d
+      - ./docker/nginx/etc/snippets:/etc/nginx/snippets
+      - .:/app/
+    ports:
+      - "80:80"
+    depends_on:
+      - php
+    networks:
+      - test
+
+networks:
+  test:
+    driver: bridge
