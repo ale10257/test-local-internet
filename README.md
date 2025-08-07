@@ -9,9 +9,10 @@
 `docker-compose exec php bash` 
 
 Последовательно выполняем команды:  
-`php init`(выбираем локальное окружение) `php init` `composer install`  `./yii migrate`
+`php init` (выбираем локальное окружение)  
+Подключаем БД - данные для подключения к БД берем из файла .env в корне проекта
 
-Данные для подключения к БД берем из файла .env в корне проекта
+`composer install`  `./yii migrate`
 
 В файл hosts добавляем домены `127.0.0.1  front.loc bg.loc api.loc`
 
