@@ -10,7 +10,7 @@ class ViewAction extends \yii\rest\ViewAction
     {
         $model = $this->findModel($id);
         if ($model && !$model->is_active) {
-            throw new NotFoundHttpException('Bank is not active');
+            throw new NotFoundHttpException('Bank has been deleted');
         }
         if ($this->checkAccess) {
             call_user_func($this->checkAccess, $this->id, $model);
