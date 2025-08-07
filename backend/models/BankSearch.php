@@ -67,15 +67,12 @@ class BankSearch extends Bank
         }
 
         if ($this->country) {
-            $cities = City::find()
-                ->alias('c')
-                ->select('c.id')
-                ->joinWith('country co')
-                ->where(['co.id' => $this->country])
-                ->column();
-            $ids = BankCity::find()
-                ->select(['bank_id'])
-                ->where(['city_id' => $cities])
+            $ids = Bank::find()
+                ->alias('b')
+                ->select(['b.id'])
+                ->joinWith(['cities.country'])
+                ->where(['countries.id' => $this->country])
+                ->distinct()
                 ->column();
             $query->andWhere(['id' => $ids]);
         }
