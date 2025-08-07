@@ -1,9 +1,6 @@
 <?php
 
-use tuyakhov\jsonapi\JsonApiParser;
-use tuyakhov\jsonapi\JsonApiResponseFormatter;
 use yii\web\Response;
-use yii\web\UrlManager;
 
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
@@ -14,28 +11,23 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'api\controllers',
-    'defaultRoute' => 'api/index',
+    'defaultRoute' => 'bank/index',
     'components' => [
         'request' => [
-            'class' => '\yii\web\Request',
             'csrfParam' => '_csrf-api',
-            'cookieValidationKey' => 'lHGtSoj7QahnI8YDr958N-X_7L0EiYaA',
+            'cookieValidationKey' => 'PsLxoY5RK74Iczg0fn7enSYAnPPo36gl',
             'parsers' => [
-                'application/json' => JsonApiParser::class,
-                'application/vnd.api+json' => JsonApiParser::class,
+                'application/json' => 'yii\web\JsonParser',
             ]
         ],
-        'response' => [
-            'class' => Response::class,
-            'format' => Response::FORMAT_JSON,
-            'formatters' => [
-                Response::FORMAT_JSON => [
-                    'class' => JsonApiResponseFormatter::class,
-                    'prettyPrint' => YII_DEBUG, // use "pretty" output in debug mode
-                    'encodeOptions' => JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
-                ],
-            ],
-        ],
+//        'formatters' => [
+//            Response::FORMAT_JSON => [
+//                'class' => 'yii\web\JsonResponseFormatter',
+//                'prettyPrint' => YII_DEBUG, // используем "pretty" в режиме отладки
+//                'encodeOptions' => JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
+//                // ...
+//            ],
+//        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -57,14 +49,13 @@ return [
             'errorAction' => 'site/error',
         ],
         'urlManager' => [
-            'class' => UrlManager::class,
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
                 [
-                    'class' => 'tuyakhov\jsonapi\UrlRule',
-                    'controller' => ['api'],
-                ]
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => ['bank' => 'bank'],
+                ],
             ],
         ],
 

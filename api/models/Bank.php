@@ -2,21 +2,12 @@
 
 namespace api\models;
 
-use tuyakhov\jsonapi\ResourceInterface;
-use tuyakhov\jsonapi\ResourceTrait;
-
-class Bank extends \common\models\banks\Bank implements ResourceInterface
+class Bank extends \common\models\banks\Bank
 {
-    use ResourceTrait;
-
-    public function getType(): string
-    {
-        return 'bank';
-    }
-
     public function fields(): array
     {
         return [
+            'id',
             'name',
             'short_description',
         ];

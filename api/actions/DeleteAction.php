@@ -8,7 +8,7 @@ use yii\db\Exception;
 use yii\web\BadRequestHttpException;
 use yii\web\NotFoundHttpException;
 
-class DeleteAction extends \tuyakhov\jsonapi\actions\DeleteAction
+class DeleteAction extends \yii\rest\DeleteAction
 {
     /**
      * @param $id

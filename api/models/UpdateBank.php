@@ -2,13 +2,8 @@
 
 namespace api\models;
 
-use tuyakhov\jsonapi\ResourceInterface;
-use tuyakhov\jsonapi\ResourceTrait;
-
-class UpdateBank extends \common\models\banks\Bank implements ResourceInterface
+class UpdateBank extends \common\models\banks\Bank
 {
-    use ResourceTrait;
-
     public function rules()
     {
         return [

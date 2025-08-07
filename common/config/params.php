@@ -1,6 +1,9 @@
 <?php
 return [
-    'adminEmail' => $_ENV['ADMIN_EMAIL'],
-    'supportEmail' => $_ENV['SUPPORT_EMAIL'],
-    'user.passwordMinLength' => $_ENV['USER_PASSWORD_MIN_LENGTH'],
+    'adminEmail' => 'admin@example.com',
+    'supportEmail' => 'support@example.com',
+    'senderEmail' => 'noreply@example.com',
+    'senderName' => 'Example.com mailer',
+    'user.passwordResetTokenExpire' => 3600,
+    'user.passwordMinLength' => 8,
 ];

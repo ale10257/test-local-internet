@@ -261,7 +261,6 @@ function setCookieValidationKey($root, $paths)
 {
     foreach ($paths as $file) {
         echo "   generate cookie validation key in $file\n";
-        $file = str_replace("main-local", "main", $file);
         $length = 32;
         $bytes = openssl_random_pseudo_bytes($length);
         $key = strtr(substr(base64_encode($bytes), 0, $length), '+/=', '_-.');
